@@ -3,7 +3,7 @@
     <string name="app_name">Portal Vallecas</string>
 
     <!--- String principales del menu de la app-->
-    <string name="action_settings">Ajustes</string>
+    <string name="action_settings">Acerca de</string>
 
     <!--- String de la activity del Menú Principal-->
     <string name="title_activity_segunda_actividad">Menú principal</string>
@@ -14,6 +14,13 @@
     <string name="boton_contactar">Contactar</string>
     <string name="boton_volver">Volver</string>
     <string name="boton_salir">Salir</string>
+
+        <!--- String de la activity del Menú Principal-->
+        <string name="tituloabout">Acerca de</string>
+        <string name="about">Portal Vallecas App, aplicación diseñada por Iyad Megdadi Nuñez</string>
+        <string name="github">GitHub: github.com/iyadmn</string>
+        <string name="version">1.07.03.21.03</string>
+
 
     <!--- String de la activity de Noticias-->
     <string name="title_activity_tercera_actividad">Últimas noticias</string>

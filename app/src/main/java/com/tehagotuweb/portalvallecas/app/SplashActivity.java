@@ -97,9 +97,7 @@ public class SplashActivity extends Activity {
                     // Creamos un intent, un objeto de la clase Intent. El intent tiene una activity origen (this) y una activity destino (MainMenuActivity.class)
                     Intent a = new Intent(SplashActivity.this, MainMenuActivity.class);
 
-                    // Le meto dos flags al intent
                     // Llamamos al método startActivity pasándole como parámetro el intent
-                    a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(a);
 
                     // Pasamos un parametro de una activity a otra por medio del intent creado

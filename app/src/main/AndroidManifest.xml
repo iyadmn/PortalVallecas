@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tehagotuweb.portalvallecas.app" >
 
-    <!--- Permisos añadidos para accesos a internet -->
+    <!-- Permisos añadidos para accesos a internet -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Inicio de ajustes para la aplicacion -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,18 +21,20 @@
             </intent-filter>
         </activity>
 
-        <!--- Declaramos la segunda actividad | Menú principal -->
+        <!-- Declaramos la segunda actividad | Menú principal -->
+        <!-- El menu principal tras que se haga el finsh del Splash pasa a ser el singleTop, la raiz de todas las activitys -->
         <activity
             android:name="com.tehagotuweb.portalvallecas.app.MainMenuActivity"
             android:label="@string/title_activity_segunda_actividad"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <!--- Declaramos la tercera actividad | Últimas Noticias -->
+        <!-- Declaramos la tercera actividad | Últimas Noticias -->
         <activity
             android:name="com.tehagotuweb.portalvallecas.app.NoticiasActivity"
             android:label="@string/title_activity_tercera_actividad" >
@@ -41,7 +44,7 @@
             </intent-filter>
         </activity>
 
-        <!--- Declaramos la cuarta actividad | Ver Articulo -->
+        <!-- Declaramos la cuarta actividad | Ver Articulo -->
         <activity
             android:name="com.tehagotuweb.portalvallecas.app.ArticuloActivity"
             android:label="@string/title_activity_quinta_actividad" >
@@ -51,14 +54,26 @@
             </intent-filter>
         </activity>
 
-        <!--- Declaramos la quinta actividad | Formulario -->
+        <!-- Declaramos la quinta actividad | Formulario -->
+        <!-- En esta activity como dispone de ActionBar y es de segundo nivel, le meto los ajustes de PARENT -->
         <activity
             android:name="com.tehagotuweb.portalvallecas.app.FormularioActivity"
-            android:label="@string/title_activity_cuarta_actividad" >
+            android:label="@string/title_activity_cuarta_actividad"
+            android:parentActivityName="com.tehagotuweb.portalvallecas.app.MainMenuActivity" >
+            <!-- meta-data de Parent activity para dar soporte a versiones 4.0 e inferiores -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tehagotuweb.portalvallecas.app.MainMenuActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <!-- Declaramos la sexta actividad | Acerca de -->
+        <activity
+            android:name="com.tehagotuweb.portalvallecas.app.AboutDialogActivity"
+            android:label="@string/tituloabout">
         </activity>
 
     </application>

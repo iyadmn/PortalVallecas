@@ -1,12 +1,14 @@
 package com.tehagotuweb.portalvallecas.app;
 
 import android.app.Activity;    // Autoimportada al hacer extends (herencia) de la clase activity
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;       // Clase que se añaden al copiar el método onCreate de la SplashActivity
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;        // Clase que se añaden al copiar el método onCreate de la SplashActivity
 import android.view.MenuInflater;
+import android.view.Window;
 import android.widget.Button;   // Clase que añade al usar los botones
 import android.view.View;       // Clase que se añade al hacer las vistas de mensajes
 import android.widget.Toast;    // Clase para que se puedan usar los Toast
@@ -35,9 +37,11 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
+
+        // Mostramos en el log que hemos alcanzado el onCreate de esta activity
         Log.d("MainMenuActivity", "onCreate");
 
-        // Meterle la toolbar dado que hemos hecho el Theme sin ActionBar
+        // Aquí se le mete la toolbar, dado que hemos hecho el Theme sin ActionBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -64,6 +68,37 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         // Inflar el recurso del menu para esta ActionBar
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case R.id.action_settings:
+                //openSettings();
+                Dialog dialog = new Dialog(MainMenuActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.about_dialog);
+                dialog.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+                //La forma tipica es hacer un Switch case pero es más facil y permite más opciones una cascada de if´s
+                /*
+                    int id = item.getItemId();
+
+                    if(id == R.id.action_settings){
+                        //openSettings();
+                        Dialog dialog = new Dialog(MainMenuActivity.this);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.about_dialog);
+                        dialog.show();
+                        return true;
+                    }
+                    return super.onOptionsItemSelected(item);
+                */
     }
 
     // Implementamos un método con el cual tener un Listerner del evento onClick de cada botón
@@ -98,9 +133,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             // Creamos un intent, un objeto de la clase Intent. El intent tiene una activity origen (this) y una activity destino (NoticiasActivity.class)
             Intent b = new Intent(MainMenuActivity.this, NoticiasActivity.class);
 
-            // Le meto dos flags al intent
             // Llamamos al método startActivity pasándole como parámetro el intent
-            b.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(b);
 
         }
@@ -127,9 +160,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             // Creamos un intent, un objeto de la clase Intent. El intent tiene una activity origen (this) y una activity destino (NoticiasActivity.class)
             Intent c = new Intent(MainMenuActivity.this, FormularioActivity.class);
 
-            // Le meto dos flags al intent
             // Llamamos al método startActivity pas?ndole como par?metro el intent
-            c.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(c);
 
         }
