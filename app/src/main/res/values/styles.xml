@@ -1,0 +1,18 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!-- Colores principales de la App -->
+        <item name="colorPrimary">@color/md_red_500</item>
+        <item name="colorPrimaryDark">@color/md_red_700</item>
+
+        <!-- Colores del texto en la lista y en los editText del formulario -->
+        <item name="android:listViewStyle">@color/md_text</item>
+        <item name="android:editTextColor">@color/md_text</item>
+
+        <!-- Color del Highlight de los botones -->
+        <item name="colorControlHighlight">@color/md_red_500</item>
+    </style>
+
+</resources>

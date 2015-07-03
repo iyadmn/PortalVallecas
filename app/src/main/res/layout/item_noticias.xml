@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@color/md_white_1000_75">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_shape_normal"
+        android:padding="8dp" >
+
+        <!-- MINIATURA -->
+        <com.android.volley.toolbox.NetworkImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/imagen"
+            android:scaleType="centerCrop"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp" />
+
+        <!-- TITULO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Título"
+            android:id="@+id/titulo"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/imagen"
+            android:layout_alignTop="@+id/imagen"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/md_text" />
+
+        <!-- DESCRIPCION -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Descripción"
+            android:id="@+id/descripcion"
+            android:layout_below="@+id/titulo"
+            android:layout_alignLeft="@+id/titulo"
+            android:layout_alignStart="@+id/titulo"
+            android:textColor="@color/md_text"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

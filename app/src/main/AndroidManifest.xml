@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tehagotuweb.portalvallecas.app" >
+
+    <!--- Permisos añadidos para accesos a internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.tehagotuweb.portalvallecas.app.SplashActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--- Declaramos la segunda actividad | Menú principal -->
+        <activity
+            android:name="com.tehagotuweb.portalvallecas.app.MainMenuActivity"
+            android:label="@string/title_activity_segunda_actividad"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--- Declaramos la tercera actividad | Últimas Noticias -->
+        <activity
+            android:name="com.tehagotuweb.portalvallecas.app.NoticiasActivity"
+            android:label="@string/title_activity_tercera_actividad" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--- Declaramos la cuarta actividad | Ver Articulo -->
+        <activity
+            android:name="com.tehagotuweb.portalvallecas.app.ArticuloActivity"
+            android:label="@string/title_activity_quinta_actividad" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--- Declaramos la quinta actividad | Formulario -->
+        <activity
+            android:name="com.tehagotuweb.portalvallecas.app.FormularioActivity"
+            android:label="@string/title_activity_cuarta_actividad" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

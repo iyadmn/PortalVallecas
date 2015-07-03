@@ -1,0 +1,37 @@
+<resources>
+    <!--- String principales de la app-->
+    <string name="app_name">Portal Vallecas</string>
+
+    <!--- String principales del menu de la app-->
+    <string name="action_settings">Ajustes</string>
+
+    <!--- String de la activity del Menú Principal-->
+    <string name="title_activity_segunda_actividad">Menú principal</string>
+    <string name="boton_noticias">Noticias</string>
+    <string name="boton_facebook">Facebook</string>
+    <string name="boton_twitter">Twitter</string>
+    <string name="boton_googleplus">Google+</string>
+    <string name="boton_contactar">Contactar</string>
+    <string name="boton_volver">Volver</string>
+    <string name="boton_salir">Salir</string>
+
+    <!--- String de la activity de Noticias-->
+    <string name="title_activity_tercera_actividad">Últimas noticias</string>
+
+    <!--- String de la activity de al ver una noticia-->
+    <string name="title_activity_quinta_actividad">Artículo</string>
+
+    <!--- String de la activity del Formulario-->
+    <string name="title_activity_cuarta_actividad">Contactar</string>
+
+    <string name="correo">Tu correo:</string>
+    <string name="suemail">Introduzca su email</string>
+    <string name="asunto">Asunto:</string>
+    <string name="asuntotexto">Introduzca el asunto</string>
+    <string name="mensaje">Mensaje:</string>
+    <string name="mensajetexto">Escriba el mensaje aquí</string>
+    <string name="enviar">Enviar</string>
+    <string name="borrar">Limpiar</string>
+
+
+</resources>

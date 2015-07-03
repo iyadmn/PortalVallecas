@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/md_white_1000"
+    android:textColor="@color/md_text">
+
+    <FrameLayout
+        android:id="@+id/statusBar"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="?attr/colorPrimary" />
+
+    <android.support.v7.widget.Toolbar
+        xmlns:tools="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        tools:layout_below="@+id/statusBar"
+        tools:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/correo"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/md_text"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp" />
+
+    <EditText
+        android:id="@+id/fromEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/suemail"
+        android:textColor="@color/md_secondary_text_icons"
+        android:textIsSelectable="false"
+        android:textColorHighlight="@color/md_disabled_hint_text"
+        android:textColorLink="@color/md_disabled_hint_text"
+        android:textColorHint="@color/md_disabled_hint_text"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp">
+    </EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/asunto"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/md_text"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp" />
+
+    <EditText
+        android:id="@+id/subject"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/asuntotexto"
+        android:textColor="@color/md_secondary_text_icons"
+        android:textColorHighlight="@color/md_disabled_hint_text"
+        android:textColorHint="@color/md_disabled_hint_text"
+        android:textColorLink="@color/md_disabled_hint_text"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp">
+    </EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mensaje"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/md_text"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp" />
+
+    <EditText
+        android:id="@+id/emailBody"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:hint="@string/mensajetexto"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:textColor="@color/md_secondary_text_icons"
+        android:textColorHighlight="@color/md_disabled_hint_text"
+        android:textColorHint="@color/md_disabled_hint_text"
+        android:textColorLink="@color/md_disabled_hint_text"
+        android:paddingLeft="5dp"
+        android:paddingTop="10dp" />
+
+</LinearLayout>

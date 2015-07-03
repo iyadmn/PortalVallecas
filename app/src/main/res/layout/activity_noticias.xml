@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_white_1000"
+    android:textColor="@color/md_text"
+    android:fitsSystemWindows="false">
+    <!-- fitsSystemWindows con valor false hace que la barra superior sea transparente, lo uso para SDK=19 -->
+
+    <!-- Corrección para las SDK superiores a 21, barra superior de alto 25dp como la barra de notificaciones-->
+    <FrameLayout
+        android:id="@+id/statusBar"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="?attr/colorPrimary" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/md_text"
+        android:id="@+id/noticias_listView" />
+</LinearLayout>
