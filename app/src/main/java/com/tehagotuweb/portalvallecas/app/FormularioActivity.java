@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -45,9 +46,10 @@ public class FormularioActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
+        // Inflar el recurso del menu para esta ActionBar
         getMenuInflater().inflate(R.menu.menu_formulario, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

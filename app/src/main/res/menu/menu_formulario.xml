@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:formulario="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainMenuActivity">
 
     <item
         android:id="@+id/menu_clear"
-        android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/borrar"/>
+        android:title="@string/borrar"
+        android:icon="@drawable/ic_close_white"
+        formulario:showAsAction="ifRoom|withText"
+        formulario:title="@string/borrar" />
 
     <item
         android:id="@+id/menu_send"
-        android:icon="@android:drawable/ic_menu_send"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/enviar"/>
+        android:title="@string/enviar"
+        android:icon="@drawable/ic_send_white"
+        formulario:showAsAction="ifRoom|withText"
+        formulario:title="@string/enviar"/>
 
 </menu>

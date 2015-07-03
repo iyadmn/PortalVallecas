@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -91,6 +90,7 @@ public final class FeedDatabase extends SQLiteOpenHelper {
         // Seleccionamos todas las filas de la tabla 'entrada'
         String peticion = "select * from " + ScriptDatabase.ENTRADA_TABLE_NAME + " ORDER BY " + ScriptDatabase.ColumnEntradas.POSTID + " DESC";
         return getWritableDatabase().rawQuery(peticion, null);
+
     }
 
     /**

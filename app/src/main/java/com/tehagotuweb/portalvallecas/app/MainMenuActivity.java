@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;       // Clase que se añaden al copiar el método onCreate de la SplashActivity
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;        // Clase que se añaden al copiar el método onCreate de la SplashActivity
+import android.view.MenuInflater;
 import android.widget.Button;   // Clase que añade al usar los botones
 import android.view.View;       // Clase que se añade al hacer las vistas de mensajes
 import android.widget.Toast;    // Clase para que se puedan usar los Toast
@@ -55,6 +56,14 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         //Inicializamos
         inicializar();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflar el recurso del menu para esta ActionBar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     // Implementamos un método con el cual tener un Listerner del evento onClick de cada botón
@@ -129,7 +138,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             Log.d("MainMenuActivity", "Boton de salir pulsado");
             // Creo un mensaje para mostrarlo en un toast
             Toast toastsalir = Toast.makeText(getBaseContext(), "Saliendo de la app", Toast.LENGTH_SHORT);
-            // Segun he ledio se debe hacer esto para que el toast se vea, si pones el raton encima de getBaseContext() te sale en la ayuda que necesita un show
+            // Segun he leido se debe hacer esto para que el toast se vea, si pones el ratón encima de getBaseContext() te sale en la ayuda que necesita un show
             toastsalir.show();
 
             // Con esto al pulsar lo que hace es salir del activity secundario y llegar al escritorio de Android

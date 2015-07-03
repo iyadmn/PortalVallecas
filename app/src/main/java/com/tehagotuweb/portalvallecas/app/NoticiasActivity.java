@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 //import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -45,6 +47,7 @@ public class NoticiasActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticias);
 
+        final Context context = getApplicationContext();
 
         // Obtener la lista
         listView = (ListView)findViewById(R.id.noticias_listView);
@@ -60,6 +63,10 @@ public class NoticiasActivity extends Activity {
                             new Response.Listener<Rss>() {
                                 @Override
                                 public void onResponse(Rss response) {
+                                    Toast toastcargado = Toast.makeText(context, "Cargando las noticias...", Toast.LENGTH_SHORT);
+                                    // Segun he leido se debe hacer esto para que el toast se vea, si pones el ratón encima de getBaseContext() te sale en la ayuda que necesita un show
+                                    toastcargado.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                    toastcargado.show();
                                     // Caching
                                     FeedDatabase.getInstance(NoticiasActivity.this).
                                             sincronizarEntradas(response.getChannel().getItems());
@@ -82,6 +89,11 @@ public class NoticiasActivity extends Activity {
                     FeedDatabase.getInstance(this).obtenerEntradas(),
                     SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
             listView.setAdapter(adapter);
+
+            Toast toastnointernet = Toast.makeText(context, "No hay conexión a Internet", Toast.LENGTH_SHORT);
+            // Segun he leido se debe hacer esto para que el toast se vea, si pones el ratón encima de getBaseContext() te sale en la ayuda que necesita un show
+            toastnointernet.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toastnointernet.show();
         }
 
 
