@@ -85,7 +85,7 @@ public class SplashActivity extends Activity {
                 try
                 {
                     //Con esto congelamos el splash dos segundos en pantalla
-                    sleep(2000);
+                    sleep(1500);
                 }
                 catch (InterruptedException e)
                 {

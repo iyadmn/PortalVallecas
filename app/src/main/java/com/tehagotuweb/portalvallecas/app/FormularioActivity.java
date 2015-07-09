@@ -1,22 +1,19 @@
 package com.tehagotuweb.portalvallecas.app;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
+
+import com.tehagotuweb.portalvallecas.app.Mail.GMailSender;
 
 public class FormularioActivity extends AppCompatActivity {
 
@@ -45,7 +42,9 @@ public class FormularioActivity extends AppCompatActivity {
         Log.d("FormularioActivity", "onCreate");
 
         fromEmail = (EditText) findViewById(R.id.fromEmail);
+        fromEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         emailSubject = (EditText) findViewById(R.id.subject);
+        emailSubject.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
         emailBody = (EditText) findViewById(R.id.emailBody);
 
     }
@@ -84,6 +83,8 @@ public class FormularioActivity extends AppCompatActivity {
                 String subject = emailSubject.getText().toString();
                 String message = emailBody.getText().toString();
 
+                /* ANTES
+
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{from});
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
@@ -93,7 +94,30 @@ public class FormularioActivity extends AppCompatActivity {
                 // need this to prompts email client only
                 email.setType("message/rfc822");
 
-                startActivity(Intent.createChooser(email, "Seleccionar un cliente de correo"));
+                try {
+                    startActivity(Intent.createChooser(email, "Seleccionar un cliente de correo"));
+                }
+                catch (Exception e){
+                    Toast.makeText(FormularioActivity.this,"No dispone de ninguna cuenta de correo en su móvil.", Toast.LENGTH_SHORT).show();
+                }
+
+                */
+
+                try {
+                    GMailSender sender = new GMailSender("latabernadedominguez@gmail.com", "roberytino");
+                    sender.sendMail(subject,message,from,to);
+                    Toast.makeText(getApplicationContext(), "Mensaje enviado", Toast.LENGTH_LONG).show();
+                    Log.d("FormularioActivity", "De: " + from);
+                    Log.d("FormularioActivity", "Para: " + to);
+                    Log.d("FormularioActivity", "Asunto: " + subject);
+                    Log.d("FormularioActivity", "Mensaje: " + message);
+                    fromEmail.setText("");
+                    emailBody.setText("");
+                    emailSubject.setText("");
+                } catch (Exception e) {
+                    Log.e("SendMail", e.getMessage(), e);
+                }
+
                 return true;
 
             default:

@@ -52,6 +52,11 @@ public class NoticiasActivity extends Activity {
         // Obtener la lista
         listView = (ListView)findViewById(R.id.noticias_listView);
 
+        Toast toastcargado = Toast.makeText(context, "Cargando las noticias...", Toast.LENGTH_LONG);
+        // Según he leído se debe hacer esto para que el toast se vea, si pones el ratón encima de getBaseContext() te sale en la ayuda que necesita un show
+        toastcargado.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toastcargado.show();
+
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
@@ -63,10 +68,7 @@ public class NoticiasActivity extends Activity {
                             new Response.Listener<Rss>() {
                                 @Override
                                 public void onResponse(Rss response) {
-                                    Toast toastcargado = Toast.makeText(context, "Cargando las noticias...", Toast.LENGTH_SHORT);
-                                    // Segun he leido se debe hacer esto para que el toast se vea, si pones el ratón encima de getBaseContext() te sale en la ayuda que necesita un show
-                                    toastcargado.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                                    toastcargado.show();
+
                                     // Caching
                                     FeedDatabase.getInstance(NoticiasActivity.this).
                                             sincronizarEntradas(response.getChannel().getItems());

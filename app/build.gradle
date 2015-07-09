@@ -8,7 +8,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 22
         versionCode 1
-        versionName '1.07.03.21.03'
+        versionName '1.07.09.04.13'
     }
     buildTypes {
         release {
@@ -31,4 +31,7 @@ dependencies {
     compile files('libs/simple-xml-2.7.1.jar')
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:leanback-v17:22.2.0'
+    compile files('libs/activation.jar')
+    compile files('libs/additionnal.jar')
+    compile files('libs/mail.jar')
 }
