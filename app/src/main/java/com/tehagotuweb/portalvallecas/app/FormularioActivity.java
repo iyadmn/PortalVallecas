@@ -1,7 +1,10 @@
 package com.tehagotuweb.portalvallecas.app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+//import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -14,6 +17,9 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.tehagotuweb.portalvallecas.app.Mail.GMailSender;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FormularioActivity extends AppCompatActivity {
 
@@ -41,10 +47,16 @@ public class FormularioActivity extends AppCompatActivity {
 
         Log.d("FormularioActivity", "onCreate");
 
+        // Modo Developer - Una manera fácil de evitar la excepción es insertar el siguiente código
+        // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        // StrictMode.setThreadPolicy(policy);
+
         fromEmail = (EditText) findViewById(R.id.fromEmail);
-        fromEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        // Al poner esto no coge correctamente el inputType asignado a este EditText del layout del formulario
+        //fromEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         emailSubject = (EditText) findViewById(R.id.subject);
-        emailSubject.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
+        // Al poner esto no coge correctamente el inputType asignado a este EditText del layout del formulario
+        //emailSubject.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT);
         emailBody = (EditText) findViewById(R.id.emailBody);
 
     }
@@ -78,44 +90,42 @@ public class FormularioActivity extends AppCompatActivity {
                 return true;
 
             case R.id.menu_send:
-                String from = fromEmail.getText().toString();
-                String to = "escribenos@portalvallecas.com";
-                String subject = emailSubject.getText().toString();
-                String message = emailBody.getText().toString();
-
-                /* ANTES
-
-                Intent email = new Intent(Intent.ACTION_SEND);
-                email.putExtra(Intent.EXTRA_EMAIL, new String[]{from});
-                email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
-                email.putExtra(Intent.EXTRA_SUBJECT, subject);
-                email.putExtra(Intent.EXTRA_TEXT, message);
-
-                // need this to prompts email client only
-                email.setType("message/rfc822");
-
-                try {
-                    startActivity(Intent.createChooser(email, "Seleccionar un cliente de correo"));
+                final String from = fromEmail.getText().toString();
+                // Comprobación de que es un correo
+                if (!isValidEmail(from)) {
+                    fromEmail.setError("Correo incorrecto");
                 }
-                catch (Exception e){
-                    Toast.makeText(FormularioActivity.this,"No dispone de ninguna cuenta de correo en su móvil.", Toast.LENGTH_SHORT).show();
+                final String to = "escribenos@portalvallecas.com";
+                final String subject = emailSubject.getText().toString();
+                final String message = emailBody.getText().toString();
+
+                if (isValidEmail(from)) {
+
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            try {
+                                GMailSender sender = new GMailSender("correo@gmail.com", "clave");
+                                sender.sendMail(subject,message,from,to);
+                                Toast.makeText(getApplicationContext(), "Mensaje enviado", Toast.LENGTH_LONG).show();
+                                Log.d("FormularioActivity", "De: " + from);
+                                Log.d("FormularioActivity", "Para: " + to);
+                                Log.d("FormularioActivity", "Asunto: " + subject);
+                                Log.d("FormularioActivity", "Mensaje: " + message);
+                                fromEmail.setText("");
+                                emailBody.setText("");
+                                emailSubject.setText("");
+                            } catch (Exception e) {
+                                Log.e("SendMail", e.getMessage(), e);
+                            }
+                        }
+                    });
+                    thread.start();
                 }
-
-                */
-
-                try {
-                    GMailSender sender = new GMailSender("latabernadedominguez@gmail.com", "roberytino");
-                    sender.sendMail(subject,message,from,to);
-                    Toast.makeText(getApplicationContext(), "Mensaje enviado", Toast.LENGTH_LONG).show();
-                    Log.d("FormularioActivity", "De: " + from);
-                    Log.d("FormularioActivity", "Para: " + to);
-                    Log.d("FormularioActivity", "Asunto: " + subject);
-                    Log.d("FormularioActivity", "Mensaje: " + message);
-                    fromEmail.setText("");
-                    emailBody.setText("");
-                    emailSubject.setText("");
-                } catch (Exception e) {
-                    Log.e("SendMail", e.getMessage(), e);
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Revisa la dirección de correo", Toast.LENGTH_LONG).show();
                 }
 
                 return true;
@@ -124,5 +134,14 @@ public class FormularioActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    // validating email id
+    private boolean isValidEmail(String email) {
+        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 }

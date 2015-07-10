@@ -43,7 +43,8 @@
         android:textColorLink="@color/md_disabled_hint_text"
         android:textColorHint="@color/md_disabled_hint_text"
         android:paddingLeft="5dp"
-        android:paddingTop="10dp">
+        android:paddingTop="10dp"
+        android:inputType="textEmailAddress">
     </EditText>
 
     <TextView
@@ -90,6 +91,7 @@
         android:textColorHint="@color/md_disabled_hint_text"
         android:textColorLink="@color/md_disabled_hint_text"
         android:paddingLeft="5dp"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:imeOptions="actionSend"/>
 
 </LinearLayout>
