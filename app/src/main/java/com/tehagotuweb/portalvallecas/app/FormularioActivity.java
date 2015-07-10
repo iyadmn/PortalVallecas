@@ -98,7 +98,7 @@ public class FormularioActivity extends AppCompatActivity {
 
                 if (isValidEmail(from)) {
                     try {
-                        GMailSender sender = new GMailSender("usuario@gmail.com", "clave");
+                        GMailSender sender = new GMailSender("correo@gmail.com", "clave");
                         sender.sendMail(from,subject,message,from,to);
                         Toast.makeText(getApplicationContext(), "Mensaje enviado", Toast.LENGTH_LONG).show();
                         Log.d("FormularioActivity", "De: " + from);
