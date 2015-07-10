@@ -1,6 +1,11 @@
 package com.tehagotuweb.portalvallecas.app.Mail;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.util.Log;
+
+import com.tehagotuweb.portalvallecas.app.FormularioActivity;
+import com.tehagotuweb.portalvallecas.app.MainMenuActivity;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -8,6 +13,7 @@ import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.ByteArrayInputStream;
@@ -22,6 +28,8 @@ public class GMailSender extends javax.mail.Authenticator {
     private String user;
     private String password;
     private Session session;
+
+    private static final String LOG = "GMailSender";
 
     static {
         Security.addProvider(new JSSEProvider());
@@ -48,21 +56,10 @@ public class GMailSender extends javax.mail.Authenticator {
         return new PasswordAuthentication(user, password);
     }
 
-    public synchronized void sendMail(String subject, String body, String sender, String recipients) throws Exception {
-        try{
-            MimeMessage message = new MimeMessage(session);
-            DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
-            message.setSender(new InternetAddress(sender));
-            message.setSubject(subject);
-            message.setDataHandler(handler);
-            if (recipients.indexOf(',') > 0)
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients));
-            else
-                message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipients));
-            Transport.send(message);
-        }catch(Exception e){
-            Log.e("GMailSender", e.getMessage(), e);
-        }
+    public synchronized void sendMail(final String from, String subject, String body, String sender, String recipients) throws Exception {
+
+        new EmailSenderTask(from, subject, body, sender, recipients).execute();
+
     }
 
     public class ByteArrayDataSource implements DataSource {
@@ -103,4 +100,80 @@ public class GMailSender extends javax.mail.Authenticator {
             throw new IOException("Not Supported");
         }
     }
+
+    /**
+     * Solving NetworkOnMainThreadException in JellyBean.
+     */
+    private class EmailSenderTask extends AsyncTask<Void, Void, Void> {
+
+        public final int REPLY_TO_ADDRESSES_AMOUNT = 1;
+
+        // Variable creada para mostrar un diálogo
+        private ProgressDialog progressDialog;
+
+        private String subject;
+        private String recipients;
+        private InternetAddress from;
+        private InternetAddress[] replyToAddresses;
+        private MimeMessage message;
+        private DataHandler handler;
+
+
+        public EmailSenderTask(final String from, String subject, String body, String sender, String recipients) {
+            this.subject = subject;
+            this.recipients = recipients;
+
+            try {
+                this.from = new InternetAddress(from.contains("@") ? from : sender);
+            } catch (AddressException e) {
+                Log.e(LOG, e.getMessage(), e);
+            }
+
+            this.replyToAddresses = new InternetAddress[REPLY_TO_ADDRESSES_AMOUNT];
+            this.replyToAddresses[0] = this.from;
+
+            this.message = new MimeMessage(session);
+            this.handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            try {
+                // TODO: gmail seems to override this... need to find out how to set the sender
+                // COMMENT: Added reply to address so that the user would be able to reply directly to the sender.
+                this.message.setSender(this.from);
+                this.message.setFrom(this.from);
+                this.message.setReplyTo(this.replyToAddresses);
+                this.message.setSubject(this.subject);
+                this.message.setDataHandler(this.handler);
+
+                if (this.recipients.indexOf(',') > 0) {
+                    this.message.setRecipients(Message.RecipientType.TO,
+                            InternetAddress.parse(this.recipients));
+                } else {
+                    this.message.setRecipient(Message.RecipientType.TO, new InternetAddress(
+                            this.recipients));
+                }
+
+                // Dialogo de envio de mensaje, necesita un contexto de una activity que no es esta en esta clase
+                //progressDialog = ProgressDialog.show(CONTEXTO, "Please wait", "Sending mail", true, false);
+
+            } catch(Exception e) {
+                Log.e(LOG, e.getMessage(), e);
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Transport.send(this.message);
+            } catch (Exception e) {
+                Log.e(LOG, e.getMessage(), e);
+            }
+
+            return null;
+        }
+    }
+
 }

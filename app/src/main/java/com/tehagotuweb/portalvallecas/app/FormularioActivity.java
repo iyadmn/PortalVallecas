@@ -1,13 +1,9 @@
 package com.tehagotuweb.portalvallecas.app;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-//import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +44,7 @@ public class FormularioActivity extends AppCompatActivity {
         Log.d("FormularioActivity", "onCreate");
 
         // Modo Developer - Una manera fácil de evitar la excepción es insertar el siguiente código
+        // La manera correcta es hacer una nueva hebra (thread) o hacer un metodo AsyncTask
         // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         // StrictMode.setThreadPolicy(policy);
 
@@ -90,42 +87,34 @@ public class FormularioActivity extends AppCompatActivity {
                 return true;
 
             case R.id.menu_send:
-                final String from = fromEmail.getText().toString();
+                String from = fromEmail.getText().toString();
                 // Comprobación de que es un correo
                 if (!isValidEmail(from)) {
                     fromEmail.setError("Correo incorrecto");
                 }
-                final String to = "escribenos@portalvallecas.com";
-                final String subject = emailSubject.getText().toString();
-                final String message = emailBody.getText().toString();
+                String to = "escribenos@portalvallecas.com";
+                String subject = emailSubject.getText().toString();
+                String message = emailBody.getText().toString();
 
                 if (isValidEmail(from)) {
-
-                    Thread thread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            try {
-                                GMailSender sender = new GMailSender("correo@gmail.com", "clave");
-                                sender.sendMail(subject,message,from,to);
-                                Toast.makeText(getApplicationContext(), "Mensaje enviado", Toast.LENGTH_LONG).show();
-                                Log.d("FormularioActivity", "De: " + from);
-                                Log.d("FormularioActivity", "Para: " + to);
-                                Log.d("FormularioActivity", "Asunto: " + subject);
-                                Log.d("FormularioActivity", "Mensaje: " + message);
-                                fromEmail.setText("");
-                                emailBody.setText("");
-                                emailSubject.setText("");
-                            } catch (Exception e) {
-                                Log.e("SendMail", e.getMessage(), e);
-                            }
-                        }
-                    });
-                    thread.start();
+                    try {
+                        GMailSender sender = new GMailSender("usuario@gmail.com", "clave");
+                        sender.sendMail(from,subject,message,from,to);
+                        Toast.makeText(getApplicationContext(), "Mensaje enviado", Toast.LENGTH_LONG).show();
+                        Log.d("FormularioActivity", "De: " + from);
+                        Log.d("FormularioActivity", "Para: " + to);
+                        Log.d("FormularioActivity", "Asunto: " + subject);
+                        Log.d("FormularioActivity", "Mensaje: " + message);
+                        fromEmail.setText("");
+                        emailBody.setText("");
+                        emailSubject.setText("");
+                    } catch (Exception e) {
+                        Log.e("SendMail", e.getMessage(), e);
+                    }
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "Revisa la dirección de correo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Revisa la direcci\u00f3n de correo", Toast.LENGTH_LONG).show();
                 }
 
                 return true;
