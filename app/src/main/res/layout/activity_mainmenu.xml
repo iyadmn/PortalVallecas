@@ -15,7 +15,7 @@
         android:id="@+id/statusBar"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:background="?attr/colorPrimary" />
+        android:background="?attr/colorPrimaryDark" />
 
     <!-- Toolbar creada dado que hemos creado los style con el tema Theme.AppCompat.NoActionBar -->
     <android.support.v7.widget.Toolbar

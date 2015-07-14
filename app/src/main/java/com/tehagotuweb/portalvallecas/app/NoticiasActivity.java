@@ -7,13 +7,18 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 //import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,7 +33,7 @@ import com.tehagotuweb.portalvallecas.app.Web.VolleySingleton;
 import com.tehagotuweb.portalvallecas.app.Web.XmlRequest;
 
 // Recordar que hay que declarar siempre en el AndroidManifest todas las Activitys
-public class NoticiasActivity extends Activity {
+public class NoticiasActivity extends AppCompatActivity {
 
     /* Etiqueta de depuración */
     private static final String TAG = NoticiasActivity.class.getSimpleName();
@@ -46,6 +51,22 @@ public class NoticiasActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticias);
+
+        // Mostramos en el log que hemos alcanzado el onCreate de esta activity
+        Log.d("NoticiasActivity", "onCreate");
+
+        // Aquí se le mete la toolbar, dado que hemos hecho el Theme sin ActionBar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        // Le oculto el titulo para poder meter los tabs
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // En versiones inferiores a SDK 19 oculto el FrameLayout que hemos usado para desplazar la toolbar
+        if (Build.VERSION.SDK_INT < 19){
+            FrameLayout statusBar = (FrameLayout) findViewById(R.id.statusBar);
+            ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
+            layoutParams.height = 0;
+        }
 
         final Context context = getApplicationContext();
 

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -98,13 +99,18 @@ public class FormularioActivity extends AppCompatActivity {
 
                 if (isValidEmail(from)) {
                     try {
-                        GMailSender sender = new GMailSender("correo@gmail.com", "clave");
+                        GMailSender sender = new GMailSender("portalvallecas@gmail.com", "saraiyadapp");
                         sender.sendMail(from,subject,message,from,to);
+                        // Escondo el Teclado
+                        hideSoftKeyboard();
+                        // Muestro el Toast de mensaje enviado
                         Toast.makeText(getApplicationContext(), "Mensaje enviado", Toast.LENGTH_LONG).show();
+                        // Log de los datos recogidos
                         Log.d("FormularioActivity", "De: " + from);
                         Log.d("FormularioActivity", "Para: " + to);
                         Log.d("FormularioActivity", "Asunto: " + subject);
                         Log.d("FormularioActivity", "Mensaje: " + message);
+                        // Vacio las casillas
                         fromEmail.setText("");
                         emailBody.setText("");
                         emailSubject.setText("");
@@ -132,5 +138,12 @@ public class FormularioActivity extends AppCompatActivity {
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    public void hideSoftKeyboard() {
+        if(getCurrentFocus()!=null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

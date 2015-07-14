@@ -14,7 +14,19 @@
         <item name="colorControlHighlight">@color/md_red_500</item>
 
         <!-- El windowTranslucentStatus no se usa en la 21 dado que oscurecería la barra superior -->
+        <!-- Hacer que la Barra de estado o notificaciones tenga color -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!-- Barra de estado o notificaciones transparente -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <!-- ActionBar Sticky -->
+        <!-- <item name="android:windowActionBarOverlay">true</item> -->
+        <!-- Support library compatibility -->
+        <!-- <item name="windowActionBarOverlay">true</item> -->
+
+        <!-- Barra de navegación translucida -->
         <item name="android:windowTranslucentNavigation">true</item>
+
 
     </style>
 
