@@ -99,7 +99,7 @@ public class FormularioActivity extends AppCompatActivity {
 
                 if (isValidEmail(from)) {
                     try {
-                        GMailSender sender = new GMailSender("portalvallecas@gmail.com", "saraiyadapp");
+                        GMailSender sender = new GMailSender("correo@gmail.com", "password");
                         sender.sendMail(from,subject,message,from,to);
                         // Escondo el Teclado
                         hideSoftKeyboard();

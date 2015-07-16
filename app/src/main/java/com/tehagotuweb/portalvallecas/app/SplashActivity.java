@@ -17,7 +17,7 @@ public class SplashActivity extends Activity {
         // Mensaje que se mostrar? en el Log del Debug
         Log.d("SplashActivity", "onCreate");
 
-        // Este método meterá una latencia en el splash para mantenerlo en pantalla y lanzar? el intent a la segunda actividad
+        // Este método meterá una latencia en el splash para mantenerlo en pantalla y lanzará el intent a la segunda actividad
         meterLatencia();
 
     }
@@ -44,19 +44,19 @@ public class SplashActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    // Sobreescribimos los m?todos del flujo de una app y metemos un log que nos mostrar? en el debug en que paso del proceso estamos en cada fase del flujo
+    // Sobreescribimos los métodos del flujo de una app y metemos un log que nos mostrará en el debug en que paso del proceso estamos en cada fase del flujo
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        // Mensaje que se mostrar? en el Log del Debug
+        // Mensaje que se mostrará en el Log del Debug
         Log.d("SplashActivity","onRestart");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Mensaje que se mostrar? en el Log del Debug
+        // Mensaje que se mostrará en el Log del Debug
         Log.d("SplashActivity", "onPause");
         // Cierro el activity del Splash principal
         finish();
@@ -65,14 +65,14 @@ public class SplashActivity extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
-        // Mensaje que se mostrar? en el Log del Debug
+        // Mensaje que se mostrará en el Log del Debug
         Log.d("SplashActivity", "onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Mensaje que se mostrar? en el Log del Debug
+        // Mensaje que se mostrará en el Log del Debug
         Log.d("SplashActivity", "onDestroy");
     }
 
@@ -80,7 +80,7 @@ public class SplashActivity extends Activity {
     {
         Thread timer = new Thread(){
             public void run(){
-                // Como la ejecucion de un activity no contempla el metodo sleep, es decir retrasar un proceso de renderizado,
+                // Como la ejecución de un activity no contempla el metodo sleep, es decir retrasar un proceso de renderizado,
                 // debemos implementarlo por medio de un try catch
                 try
                 {
@@ -106,7 +106,7 @@ public class SplashActivity extends Activity {
                 }
 
             }
-        }; //Cerramos la hebra de programaci?n
+        }; //Cerramos la hebra de programación
 
         //Lanzamos el hebra
         timer.start();

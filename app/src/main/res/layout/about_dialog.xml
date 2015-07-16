@@ -5,7 +5,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/md_white_1000"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:paddingBottom="30dp">
 
     <TextView
         android:id="@+id/textViewAboutDialogTitle"
@@ -41,16 +43,35 @@
         android:textColor="?attr/colorAccent"
         android:textColorLink="?attr/colorAccent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_row="3"
-        android:layout_marginBottom="24dp"
-        android:layout_marginLeft="24dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/md_secondary_text_icons"
-        android:text="@string/version"
-        android:id="@+id/version" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.54">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tituloversion"
+            android:id="@+id/tituloversion"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="25dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/md_secondary_text_icons" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_row="3"
+            android:layout_marginLeft="10dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/md_secondary_text_icons"
+            android:text="@string/version"
+            android:id="@+id/version"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/tituloversion" />
+
+    </RelativeLayout>
 
 </LinearLayout>

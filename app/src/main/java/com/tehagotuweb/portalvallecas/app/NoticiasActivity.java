@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 //import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,8 +19,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -61,6 +64,9 @@ public class NoticiasActivity extends AppCompatActivity {
         // Le oculto el titulo para poder meter los tabs
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        // Necesario para saber sobre que contexto trabajamos
+        final Context context = getApplicationContext();
+
         // En versiones inferiores a SDK 19 oculto el FrameLayout que hemos usado para desplazar la toolbar
         if (Build.VERSION.SDK_INT < 19){
             FrameLayout statusBar = (FrameLayout) findViewById(R.id.statusBar);
@@ -68,7 +74,63 @@ public class NoticiasActivity extends AppCompatActivity {
             layoutParams.height = 0;
         }
 
-        final Context context = getApplicationContext();
+        //*************************************************
+        //Spinner con filtros de las distintas categorías *
+        //*************************************************
+
+            Spinner cmbToolbar = (Spinner) findViewById(R.id.CmbToolbar);
+
+            ArrayAdapter<String> adapter2 = new ArrayAdapter<>(
+                    getSupportActionBar().getThemedContext(),
+                    R.layout.appbar_filter_title,
+                    new String[]{"\u00daltimas noticias",
+                                 "El Barrio",
+                                 "Ocio, Arte y Cultura",
+                                 "Deporte y Salud",
+                                 "Comercios",
+                                 "Informaci\u00f3n y Web"});
+
+            adapter2.setDropDownViewResource(R.layout.appbar_filter_list);
+
+            cmbToolbar.setAdapter(adapter2);
+
+            cmbToolbar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    //... Acciones al seleccionar una opción de la lista
+                    Log.i("Spinner", "Seleccionada la opción " + i);
+                    if (i==0){
+                        //No hacer nada es la misma opción
+                    }
+                    if (i==1){
+
+                    }
+                    if (i==2){
+
+
+                    if (i==3){
+
+                    }
+                    if (i==4){
+
+                    }
+                    if (i==5){
+
+                    }                   }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                    //... Acciones al no existir ningún elemento seleccionado
+                }
+            });
+
+        //*************************************************
+        //*                   Fin del Spinner             *
+        //*************************************************
+
+
+        // Continuación con el List view de las noticias
 
         // Obtener la lista
         listView = (ListView)findViewById(R.id.noticias_listView);
@@ -113,13 +175,11 @@ public class NoticiasActivity extends AppCompatActivity {
                     SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
             listView.setAdapter(adapter);
 
-            Toast toastnointernet = Toast.makeText(context, "No hay conexión a Internet", Toast.LENGTH_SHORT);
+            Toast toastnointernet = Toast.makeText(context, "No hay conexi\u00f3n a Internet", Toast.LENGTH_SHORT);
             // Segun he leido se debe hacer esto para que el toast se vea, si pones el ratón encima de getBaseContext() te sale en la ayuda que necesita un show
             toastnointernet.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toastnointernet.show();
         }
-
-
 
 
         // Regisgrar escucha de la lista
@@ -166,4 +226,5 @@ public class NoticiasActivity extends AppCompatActivity {
             listView.setAdapter(adapter);
         }
     }
+
 }

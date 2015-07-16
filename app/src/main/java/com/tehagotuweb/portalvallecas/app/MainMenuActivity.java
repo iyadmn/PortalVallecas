@@ -44,6 +44,8 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         // Aquí se le mete la toolbar, dado que hemos hecho el Theme sin ActionBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // Ver icono de la app en la ActionBar
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         // En versiones inferiores a SDK 19 oculto el FrameLayout que hemos usado para desplazar la toolbar
         if (Build.VERSION.SDK_INT < 19){

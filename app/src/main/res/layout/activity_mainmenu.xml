@@ -89,8 +89,7 @@
         android:id="@+id/BtnSalir"
         android:drawableStart="@drawable/exit"
         android:width="150dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="76dp" />
+        android:layout_below="@+id/BtnContactar"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
