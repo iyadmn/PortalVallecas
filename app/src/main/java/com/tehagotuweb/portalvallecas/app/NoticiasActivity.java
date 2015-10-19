@@ -92,6 +92,7 @@ public class NoticiasActivity extends AppCompatActivity {
             // Le oculto el t�tulo para poder meter los filters
             getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+            // Esta correccion se hacia antes, ahora con la nueva forma de gestionar la toolbar se hace por medio del fichero attrs.xml en sus diferentes versiones
             // En versiones inferiores a SDK 19 oculto el FrameLayout que hemos usado para desplazar la toolbar
             /*if (Build.VERSION.SDK_INT < 19){
                 FrameLayout statusBar = (FrameLayout) findViewById(R.id.statusBar);
@@ -102,11 +103,21 @@ public class NoticiasActivity extends AppCompatActivity {
         //*                   Fin de toolbar               *
         //**************************************************
 
-        // Añadimos
+        //***********************************************
+        //*               Inicio de ActionBar           *
+        //***********************************************
 
         actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        //********************************************
+        //*               Fin de ActionBar           *
+        //********************************************
+
+        //*******************************************************
+        //*               Inicio del NavigationDrawer           *
+        //*******************************************************
 
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
 
@@ -116,6 +127,10 @@ public class NoticiasActivity extends AppCompatActivity {
         }
 
         setupNavigationDrawerContent(navigationView);
+
+        //****************************************************
+        //*               Fin del NavigationDrawer           *
+        //****************************************************
 
         //**************************************************
         // Spinner con filtros de las distintas categor�as *
@@ -278,6 +293,12 @@ public class NoticiasActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
+            // Si se pulsa sobre el botón de Home (Navigation Drawer tres líneas)
+            // Si pones "case android.R.id.home:" si funciona pero si pones "case R.id.home:" NO FUNCIONA
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            // Si se pulsa sobre el botón de Settings (tres puntos)
             case R.id.action_settings:
                 //openSettings();
                 Dialog dialog = new Dialog(NoticiasActivity.this);

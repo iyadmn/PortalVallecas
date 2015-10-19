@@ -15,16 +15,25 @@
     <string name="boton_volver">Volver</string>
     <string name="boton_salir">Salir</string>
 
+    <!--- String de la activity de Noticias-->
+    <string name="title_activity_tercera_actividad">Últimas noticias</string>
+
+        <!-- Strings del Navigation Drawer-->
+        <string name="titulo_listado">Noticias</string>
+        <string name="titulo_primer_subtitulo">Redes Sociales</string>
+        <string name="titulo_social_facebook">Facebook</string>
+        <string name="titulo_social_twitter">Twitter</string>
+        <string name="titulo_social_googleplus">Google +</string>
+        <string name="titulo_segundo_subtitulo">Otras opciones</string>
+        <string name="titulo_correo">Correo</string>
+        <string name="titulo_ajustes">Ajustes</string>
+
         <!--- String de la activity del Menú Principal-->
         <string name="tituloabout">Acerca de</string>
         <string name="about">Portal Vallecas App, aplicación diseñada por Iyad Megdadi Nuñez</string>
         <string name="github">GitHub: github.com/iyadmn</string>
         <string name="tituloversion">Versión:</string>
-        <string name="version">1.19.10.2015.03.33</string>
-
-
-    <!--- String de la activity de Noticias-->
-    <string name="title_activity_tercera_actividad">Últimas noticias</string>
+        <string name="version">1.19.10.2015.03.51</string>
 
     <!--- String de la activity de al ver una noticia-->
     <string name="title_activity_quinta_actividad">Artículo</string>
@@ -40,16 +49,5 @@
     <string name="mensajetexto">Escriba el mensaje aquí</string>
     <string name="enviar">Enviar</string>
     <string name="borrar">Limpiar</string>
-
-    <!-- Strings del Navigation Drawer-->
-    <string name="titulo_listado">Noticias</string>
-    <string name="titulo_primer_subtitulo">Redes Sociales</string>
-    <string name="titulo_social_facebook">Facebook</string>
-    <string name="titulo_social_twitter">Twitter</string>
-    <string name="titulo_social_googleplus">Google +</string>
-    <string name="titulo_segundo_subtitulo">Otras opciones</string>
-    <string name="titulo_correo">Correo</string>
-    <string name="titulo_ajustes">Ajustes</string>
-
 
 </resources>
