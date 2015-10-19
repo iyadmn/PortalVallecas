@@ -20,7 +20,7 @@
         <string name="about">Portal Vallecas App, aplicación diseñada por Iyad Megdadi Nuñez</string>
         <string name="github">GitHub: github.com/iyadmn</string>
         <string name="tituloversion">Versión:</string>
-        <string name="version">1.07.16.02.26</string>
+        <string name="version">1.19.10.2015.03.33</string>
 
 
     <!--- String de la activity de Noticias-->
@@ -40,6 +40,16 @@
     <string name="mensajetexto">Escriba el mensaje aquí</string>
     <string name="enviar">Enviar</string>
     <string name="borrar">Limpiar</string>
+
+    <!-- Strings del Navigation Drawer-->
+    <string name="titulo_listado">Noticias</string>
+    <string name="titulo_primer_subtitulo">Redes Sociales</string>
+    <string name="titulo_social_facebook">Facebook</string>
+    <string name="titulo_social_twitter">Twitter</string>
+    <string name="titulo_social_googleplus">Google +</string>
+    <string name="titulo_segundo_subtitulo">Otras opciones</string>
+    <string name="titulo_correo">Correo</string>
+    <string name="titulo_ajustes">Ajustes</string>
 
 
 </resources>

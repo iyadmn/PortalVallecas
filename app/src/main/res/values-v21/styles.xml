@@ -3,15 +3,21 @@
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
 
         <!-- Colores principales de la App -->
+        <!-- Colores de la ToolBar -->
         <item name="colorPrimary">@color/md_red_500</item>
+        <!-- Colores de la StatusBar -->
         <item name="colorPrimaryDark">@color/md_red_700</item>
+        <!-- Color de fondo de las ventanas -->
+        <item name="android:windowBackground">@color/md_white_1000</item>
 
         <!-- Colores del texto en la lista y en los editText del formulario -->
         <item name="android:listViewStyle">@color/md_text</item>
         <item name="android:editTextColor">@color/md_text</item>
 
+        <!-- Color del Accent -->
+        <item name="colorAccent">@color/md_red_700</item>
         <!-- Color del Highlight de los botones -->
-        <item name="colorControlHighlight">@color/md_red_500</item>
+        <item name="colorControlHighlight">@color/md_indigo_500_25</item>
 
         <!-- El windowTranslucentStatus no se usa en la 21 dado que oscurecería la barra superior -->
         <!-- Hacer que la Barra de estado o notificaciones tenga color -->
@@ -24,6 +30,8 @@
         <!-- Support library compatibility -->
         <!-- <item name="windowActionBarOverlay">true</item> -->
 
+        <!-- Antes windowTranslucentStatus no se usaba, pero con los cambios hechos en esta version se debe usar para oscurecer la StatusBar -->
+        <item name="android:windowTranslucentStatus">true</item>
         <!-- Barra de navegación translucida -->
         <item name="android:windowTranslucentNavigation">true</item>
 

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebView;
@@ -16,7 +17,7 @@ import android.widget.FrameLayout;
 // Recordar que hay que declarar siempre en el AndroidManifest todas las Activitys
 public class ArticuloActivity extends Activity {
 
-    /* Etiqueta de depuración */
+    /* Etiqueta de depuraciï¿½n */
     private static final String TAG = ArticuloActivity.class.getSimpleName();
 
     @Override
@@ -31,8 +32,9 @@ public class ArticuloActivity extends Activity {
         if (Build.VERSION.SDK_INT < 19){
             // Hago que el FrameLayout tenga 0 de alto
             FrameLayout statusBar = (FrameLayout) findViewById(R.id.statusBar);
-            ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
-            layoutParams.height = 0;
+            statusBar.setVisibility(View.GONE);
+            /*ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
+            layoutParams.height = 0;*/
 
             //NOTA - AQUI HABRIA QUE CONSEGUIR QUE EL WEBVIEW PIERDA EL MARGIN DE 25
         }

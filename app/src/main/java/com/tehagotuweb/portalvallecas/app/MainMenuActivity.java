@@ -4,13 +4,13 @@ import android.app.Activity;    // Autoimportada al hacer extends (herencia) de 
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;       // Clase que se añaden al copiar el método onCreate de la SplashActivity
+import android.os.Bundle;       // Clase que se aï¿½aden al copiar el mï¿½todo onCreate de la SplashActivity
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;        // Clase que se añaden al copiar el método onCreate de la SplashActivity
+import android.util.Log;        // Clase que se aï¿½aden al copiar el mï¿½todo onCreate de la SplashActivity
 import android.view.MenuInflater;
 import android.view.Window;
-import android.widget.Button;   // Clase que añade al usar los botones
-import android.view.View;       // Clase que se añade al hacer las vistas de mensajes
+import android.widget.Button;   // Clase que aï¿½ade al usar los botones
+import android.view.View;       // Clase que se aï¿½ade al hacer las vistas de mensajes
 import android.widget.Toast;    // Clase para que se puedan usar los Toast
 import android.support.v7.app.ActionBarActivity;
 import android.os.Build;
@@ -41,7 +41,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         // Mostramos en el log que hemos alcanzado el onCreate de esta activity
         Log.d("MainMenuActivity", "onCreate");
 
-        // Aquí se le mete la toolbar, dado que hemos hecho el Theme sin ActionBar
+        // Aquï¿½ se le mete la toolbar, dado que hemos hecho el Theme sin ActionBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Ver icono de la app en la ActionBar
@@ -50,8 +50,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         // En versiones inferiores a SDK 19 oculto el FrameLayout que hemos usado para desplazar la toolbar
         if (Build.VERSION.SDK_INT < 19){
             FrameLayout statusBar = (FrameLayout) findViewById(R.id.statusBar);
-            ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
-            layoutParams.height = 0;
+            statusBar.setVisibility(View.GONE);
+            /*ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
+            layoutParams.height = 0;*/
         }
 
         /*//Capturamos en una variable de tipo String el String que pasamos desde el Intent de una activity a otra
@@ -87,7 +88,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 return super.onOptionsItemSelected(item);
         }
 
-                //La forma tipica es hacer un Switch case pero es más facil y permite más opciones una cascada de if´s
+                //La forma tipica es hacer un Switch case pero es mï¿½s facil y permite mï¿½s opciones una cascada de ifï¿½s
                 /*
                     int id = item.getItemId();
 
@@ -103,7 +104,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 */
     }
 
-    // Implementamos un método con el cual tener un Listerner del evento onClick de cada botón
+    // Implementamos un mï¿½todo con el cual tener un Listerner del evento onClick de cada botï¿½n
     private void inicializar(){
 
         botonnoticias=(Button)findViewById(R.id.BtnNoticias);
@@ -126,7 +127,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    // Implementamos un método con el cual se lanza el Toast con el mensaje al pulsar el boton de Volver de esta activity
+    // Implementamos un mï¿½todo con el cual se lanza el Toast con el mensaje al pulsar el boton de Volver de esta activity
     public void onClick(View v) {
         if (v.getId()== R.id.BtnNoticias) {
 
@@ -135,7 +136,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             // Creamos un intent, un objeto de la clase Intent. El intent tiene una activity origen (this) y una activity destino (NoticiasActivity.class)
             Intent b = new Intent(MainMenuActivity.this, NoticiasActivity.class);
 
-            // Llamamos al método startActivity pasándole como parámetro el intent
+            // Llamamos al mï¿½todo startActivity pasï¿½ndole como parï¿½metro el intent
             startActivity(b);
 
         }
@@ -162,7 +163,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             // Creamos un intent, un objeto de la clase Intent. El intent tiene una activity origen (this) y una activity destino (NoticiasActivity.class)
             Intent c = new Intent(MainMenuActivity.this, FormularioActivity.class);
 
-            // Llamamos al método startActivity pas?ndole como par?metro el intent
+            // Llamamos al mï¿½todo startActivity pas?ndole como par?metro el intent
             startActivity(c);
 
         }
@@ -171,7 +172,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             Log.d("MainMenuActivity", "Boton de salir pulsado");
             // Creo un mensaje para mostrarlo en un toast
             Toast toastsalir = Toast.makeText(getBaseContext(), "Saliendo de la app", Toast.LENGTH_SHORT);
-            // Segun he leido se debe hacer esto para que el toast se vea, si pones el ratón encima de getBaseContext() te sale en la ayuda que necesita un show
+            // Segun he leido se debe hacer esto para que el toast se vea, si pones el ratï¿½n encima de getBaseContext() te sale en la ayuda que necesita un show
             toastsalir.show();
 
             // Con esto al pulsar lo que hace es salir del activity secundario y llegar al escritorio de Android
@@ -180,10 +181,10 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             /*// Creamos un intent para volver a la actividad anterior
             Intent b = new Intent(MainMenuActivity.this, SplashActivity.class);
             b.putExtra("EXIT", true);
-            //Llamamos al método startActivity pasándole como parámetro el intent
+            //Llamamos al mï¿½todo startActivity pasï¿½ndole como parï¿½metro el intent
             startActivity(b);*/
 
-        }// Fin del caso de que el botón pulsado sea (xml)BtnSalir == (java)botonsalir
+        }// Fin del caso de que el botï¿½n pulsado sea (xml)BtnSalir == (java)botonsalir
     }
 
 }

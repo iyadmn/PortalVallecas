@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -28,23 +29,24 @@ public class FormularioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
 
-        // Aquí se le mete la toolbar, dado que hemos hecho el Theme sin ActionBar
+        // Aquï¿½ se le mete la toolbar, dado que hemos hecho el Theme sin ActionBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Activamos la opción para que muestre la flecha de atras en la ActionBar para volver a la activity PARENT
+        // Activamos la opciï¿½n para que muestre la flecha de atras en la ActionBar para volver a la activity PARENT
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // En versiones inferiores a SDK 19 oculto el FrameLayaout que hemos usado para desplazar la toolbar
         if (Build.VERSION.SDK_INT < 19){
             FrameLayout statusBar = (FrameLayout) findViewById(R.id.statusBar);
-            ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
-            layoutParams.height = 0;
+            statusBar.setVisibility(View.GONE);
+            /*ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
+            layoutParams.height = 0;*/
         }
 
         Log.d("FormularioActivity", "onCreate");
 
-        // Modo Developer - Una manera fácil de evitar la excepción es insertar el siguiente código
+        // Modo Developer - Una manera fï¿½cil de evitar la excepciï¿½n es insertar el siguiente cï¿½digo
         // La manera correcta es hacer una nueva hebra (thread) o hacer un metodo AsyncTask
         // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         // StrictMode.setThreadPolicy(policy);
@@ -69,10 +71,10 @@ public class FormularioActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        // Aquí debería hacer la opción de salir
+        // Aquï¿½ deberï¿½a hacer la opciï¿½n de salir
         switch (item.getItemId()) {
 
-            // Según la web de Google esto seria necesario ademas de definir en el Manifest el PARENT a las activitys de segundo nivel
+            // Segï¿½n la web de Google esto seria necesario ademas de definir en el Manifest el PARENT a las activitys de segundo nivel
             // http://developer.android.com/intl/es/training/implementing-navigation/ancestral.html#NavigateUp
             // Segun la web de desarrollador.android no es necesario:
             // http://desarrollador-android.com/desarrollo/formacion/empezar-formacion/anadir-la-action-bar/anadir-botones-de-accion/
@@ -89,7 +91,7 @@ public class FormularioActivity extends AppCompatActivity {
 
             case R.id.menu_send:
                 String from = fromEmail.getText().toString();
-                // Comprobación de que es un correo
+                // Comprobaciï¿½n de que es un correo
                 if (!isValidEmail(from)) {
                     fromEmail.setError("Correo incorrecto");
                 }

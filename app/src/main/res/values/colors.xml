@@ -661,4 +661,12 @@
     <color name="md_secondary_text_icons">#8a000000</color>
     <color name="md_disabled_hint_text">#4c000000</color>
     <color name="md_divider">#1f000000</color>
+
+    <!-- Color de la App de Codecanyon añadidos -->
+    <color name="post_bg">#d3d6db</color>
+    <color name="timestamp">#a0a3a7</color>
+    <color name="post_item_bg">#ffffff</color>
+    <color name="post_item_border">#c2c3c8</color>
+    <color name="bottom_border">#c2c3c8</color>
+
 </resources>

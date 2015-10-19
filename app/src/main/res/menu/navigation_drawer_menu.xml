@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:checked="true"
+            android:id="@+id/item_navigation_drawer_listado_noticias"
+            android:icon="@drawable/ic_view_list_black_24dp"
+            android:title="@string/titulo_listado" />
+    </group>
+
+    <item android:title="@string/titulo_primer_subtitulo">
+        <menu>
+            <item
+                android:id="@+id/item_navigation_drawer_facebook"
+                android:icon="@drawable/ic_social_facebook_black"
+                android:title="@string/titulo_social_facebook" />
+            <item
+                android:id="@+id/item_navigation_drawer_twitter"
+                android:icon="@drawable/ic_social_twitter_black"
+                android:title="@string/titulo_social_twitter" />
+            <item
+                android:id="@+id/item_navigation_drawer_googleplus"
+                android:icon="@drawable/ic_social_googleplus_black"
+                android:title="@string/titulo_social_googleplus" />
+        </menu>
+    </item>
+
+    <item android:title="@string/titulo_segundo_subtitulo">
+        <menu>
+            <item
+                android:id="@+id/item_navigation_drawer_ajustes"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/titulo_ajustes" />
+            <item
+                android:id="@+id/item_navigation_drawer_correo"
+                android:icon="@drawable/ic_email_black_24dp"
+                android:title="@string/titulo_correo" />
+        </menu>
+    </item>
+
+</menu>

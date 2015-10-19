@@ -1,18 +1,37 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Tema base de la aplicación -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
         <!-- Colores principales de la App -->
+        <!-- Colores de la ToolBar -->
         <item name="colorPrimary">@color/md_red_500</item>
+        <!-- Colores de la StatusBar -->
         <item name="colorPrimaryDark">@color/md_red_700</item>
+        <!-- Color de fondo de las ventanas -->
+        <item name="android:windowBackground">@color/md_white_1000</item>
 
         <!-- Colores del texto en la lista y en los editText del formulario -->
         <item name="android:listViewStyle">@color/md_text</item>
         <item name="android:editTextColor">@color/md_text</item>
 
+        <!-- Color del Accent -->
+        <item name="colorAccent">@color/md_red_700</item>
         <!-- Color del Highlight de los botones -->
-        <item name="colorControlHighlight">@color/md_red_500</item>
+        <item name="colorControlHighlight">@color/md_indigo_500_25</item>
     </style>
 
+    <!-- Estilo de la ToolBar -->
+    <style name="ToolbarTheme" parent="AppTheme">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+
+    <!-- Navigation Drawer muestre los elementos con la letra Roboto Medium en vez de Roboto Regular -->
+    <style name="NavigationViewTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/md_white_1000</item>
+        <item name="android:textColorPrimary">@color/md_grey_500</item>
+        <item name="android:textColorSecondary">@color/md_grey_700</item>
+        <item name="textAppearanceListItem">@style/TextAppearance.AppCompat.Body2</item>
+
+    </style>
 </resources>

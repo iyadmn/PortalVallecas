@@ -28,7 +28,7 @@ import com.tehagotuweb.portalvallecas.app.Web.VolleySingleton;
 public class FeedAdapter extends CursorAdapter {
 
     /*
-    Etiqueta de Depuración
+    Etiqueta de Depuraciï¿½n
      */
     private static final String TAG = FeedAdapter.class.getSimpleName();
 
@@ -79,11 +79,11 @@ public class FeedAdapter extends CursorAdapter {
         // Setear el texto al titulo
         vh.titulo.setText(cursor.getString(vh.tituloI));
 
-        // Obtener acceso a la descripción y su longitud
+        // Obtener acceso a la descripciï¿½n y su longitud
         int ln = cursor.getString(vh.descripcionI).length();
         String descripcion = cursor.getString(vh.descripcionI);
 
-        // Acortar descripción a 77 caracteres
+        // Acortar descripciï¿½n a 77 caracteres
         if (ln >= 150)
             vh.descripcion.setText(descripcion.substring(0, 150)+"...");
         else vh.descripcion.setText(descripcion);

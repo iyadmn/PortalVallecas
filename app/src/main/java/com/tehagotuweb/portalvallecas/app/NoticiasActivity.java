@@ -1,30 +1,41 @@
 package com.tehagotuweb.portalvallecas.app;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.SimpleCursorAdapter;
 //import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
+import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.tehagotuweb.portalvallecas.app.Modelo.FeedDatabase;
@@ -35,14 +46,15 @@ import com.tehagotuweb.portalvallecas.app.UI.FeedAdapter;
 import com.tehagotuweb.portalvallecas.app.Web.VolleySingleton;
 import com.tehagotuweb.portalvallecas.app.Web.XmlRequest;
 
+
 // Recordar que hay que declarar siempre en el AndroidManifest todas las Activitys
 public class NoticiasActivity extends AppCompatActivity {
 
-    /* Etiqueta de depuración */
+    /* Etiqueta de depuraciï¿½n */
     private static final String TAG = NoticiasActivity.class.getSimpleName();
 
     /* URL del feed */
-    public static final String URL_FEED = "http://www.portalvallecas.es/linea-temporal/feed/";
+    public static String URL_FEED = "http://www.portalvallecas.es/linea-temporal/feed/";
 
     /* Lista */
     private ListView listView;
@@ -50,33 +62,64 @@ public class NoticiasActivity extends AppCompatActivity {
     /* Adaptador */
     private FeedAdapter adapter;
 
+    // AÃ±adidos
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
+    ActionBar actionBar;
+    TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Si se quiere con tabs cambiar esta lï¿½nea por la siguiente:
+        // setContentView(R.layout.activity_noticias_contabs);
+        // Y desactivar lo que hace la carga de noticias
         setContentView(R.layout.activity_noticias);
+
+        // Necesario para saber sobre que contexto trabajamos para tareas posteriores
+        final Context context = getApplicationContext();
 
         // Mostramos en el log que hemos alcanzado el onCreate de esta activity
         Log.d("NoticiasActivity", "onCreate");
 
-        // Aquí se le mete la toolbar, dado que hemos hecho el Theme sin ActionBar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Le oculto el titulo para poder meter los tabs
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //**************************************************************************
+        // Aquï¿½ se le mete la toolbar, dado que hemos hecho el Theme sin ActionBar *
+        //**************************************************************************
 
-        // Necesario para saber sobre que contexto trabajamos
-        final Context context = getApplicationContext();
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        // En versiones inferiores a SDK 19 oculto el FrameLayout que hemos usado para desplazar la toolbar
-        if (Build.VERSION.SDK_INT < 19){
-            FrameLayout statusBar = (FrameLayout) findViewById(R.id.statusBar);
-            ViewGroup.LayoutParams layoutParams = statusBar.getLayoutParams();
-            layoutParams.height = 0;
+            // Le oculto el tï¿½tulo para poder meter los filters
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+            // En versiones inferiores a SDK 19 oculto el FrameLayout que hemos usado para desplazar la toolbar
+            /*if (Build.VERSION.SDK_INT < 19){
+                FrameLayout statusBar = (FrameLayout) findViewById(R.id.statusBar);
+                statusBar.setVisibility(View.GONE);
+            }*/
+
+        //**************************************************
+        //*                   Fin de toolbar               *
+        //**************************************************
+
+        // AÃ±adimos
+
+        actionBar = getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        if (navigationView != null) {
+            setupNavigationDrawerContent(navigationView);
         }
 
-        //*************************************************
-        //Spinner con filtros de las distintas categorías *
-        //*************************************************
+        setupNavigationDrawerContent(navigationView);
+
+        //**************************************************
+        // Spinner con filtros de las distintas categorï¿½as *
+        //**************************************************
 
             Spinner cmbToolbar = (Spinner) findViewById(R.id.CmbToolbar);
 
@@ -97,17 +140,20 @@ public class NoticiasActivity extends AppCompatActivity {
             cmbToolbar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    //... Acciones al seleccionar una opción de la lista
-                    Log.i("Spinner", "Seleccionada la opción " + i);
+                    //... Acciones al seleccionar una opciï¿½n de la lista
+                    Log.i("Spinner", "Seleccionada la opciï¿½n " + i);
                     if (i==0){
-                        //No hacer nada es la misma opción
+                        // No hacer nada es la misma opciï¿½n
+                        // URL_FEED = "http://www.portalvallecas.es/linea-temporal/feed/";
+                        // Log.i("Url", URL_FEED);
                     }
                     if (i==1){
+                        // URL_FEED = "http://www.portalvallecas.es/categoria/el-barrio/feed/";
+                        // Log.i("Url", URL_FEED);
+                    }
+                    if (i==2) {
 
                     }
-                    if (i==2){
-
-
                     if (i==3){
 
                     }
@@ -116,12 +162,12 @@ public class NoticiasActivity extends AppCompatActivity {
                     }
                     if (i==5){
 
-                    }                   }
+                    }
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
-                    //... Acciones al no existir ningún elemento seleccionado
+                    //... Acciones al no existir ningï¿½n elemento seleccionado
                 }
             });
 
@@ -129,14 +175,31 @@ public class NoticiasActivity extends AppCompatActivity {
         //*                   Fin del Spinner             *
         //*************************************************
 
+        //*************************************************
+        //*                 Tabs + ViewPager              *
+        //*************************************************
 
-        // Continuación con el List view de las noticias
+            //Establecer el PageAdapter del componente ViewPager
+            /*ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+            viewPager.setAdapter(new FragmentAdapter(
+                    getSupportFragmentManager()));
+
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.appbartabs);
+            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+            tabLayout.setupWithViewPager(viewPager);*/
+
+        //*************************************************
+        //*         Fin de los Tabs + ViewPager           *
+        //*************************************************
+
+
+        // Continuaciï¿½n con el List view de las noticias
 
         // Obtener la lista
         listView = (ListView)findViewById(R.id.noticias_listView);
 
         Toast toastcargado = Toast.makeText(context, "Cargando las noticias...", Toast.LENGTH_LONG);
-        // Según he leído se debe hacer esto para que el toast se vea, si pones el ratón encima de getBaseContext() te sale en la ayuda que necesita un show
+        // Segï¿½n he leï¿½do se debe hacer esto para que el toast se vea, si pones el ratï¿½n encima de getBaseContext() te sale en la ayuda que necesita un show
         toastcargado.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         toastcargado.show();
 
@@ -168,7 +231,7 @@ public class NoticiasActivity extends AppCompatActivity {
                     )
             );
         } else {
-            Log.i(TAG, "La conexión a internet no está disponible");
+            Log.i(TAG, "La conexiï¿½n a internet no estï¿½ disponible");
             adapter= new FeedAdapter(
                     this,
                     FeedDatabase.getInstance(this).obtenerEntradas(),
@@ -176,7 +239,7 @@ public class NoticiasActivity extends AppCompatActivity {
             listView.setAdapter(adapter);
 
             Toast toastnointernet = Toast.makeText(context, "No hay conexi\u00f3n a Internet", Toast.LENGTH_SHORT);
-            // Segun he leido se debe hacer esto para que el toast se vea, si pones el ratón encima de getBaseContext() te sale en la ayuda que necesita un show
+            // Segun he leido se debe hacer esto para que el toast se vea, si pones el ratï¿½n encima de getBaseContext() te sale en la ayuda que necesita un show
             toastnointernet.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toastnointernet.show();
         }
@@ -191,7 +254,7 @@ public class NoticiasActivity extends AppCompatActivity {
                 // Obtene url de la entrada seleccionada
                 String url = c.getString(c.getColumnIndex(ScriptDatabase.ColumnEntradas.URL));
 
-                // Nuevo intent explícito
+                // Nuevo intent explï¿½cito
                 Intent i = new Intent(NoticiasActivity.this, ArticuloActivity.class);
 
                 // Setear url
@@ -201,6 +264,45 @@ public class NoticiasActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflar el recurso del menu para esta ActionBar
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case R.id.action_settings:
+                //openSettings();
+                Dialog dialog = new Dialog(NoticiasActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.about_dialog);
+                dialog.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        //La forma tipica es hacer un Switch case pero es mï¿½s facil y permite mï¿½s opciones una cascada de ifï¿½s
+                /*
+                    int id = item.getItemId();
+
+                    if(id == R.id.action_settings){
+                        //openSettings();
+                        Dialog dialog = new Dialog(MainMenuActivity.this);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.about_dialog);
+                        dialog.show();
+                        return true;
+                    }
+                    return super.onOptionsItemSelected(item);
+                */
     }
 
     public class LoadData extends AsyncTask<Void, Void, Cursor> {
@@ -227,4 +329,66 @@ public class NoticiasActivity extends AppCompatActivity {
         }
     }
 
+    private void setupNavigationDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        //textView = (TextView) findViewById(R.id.textView);
+                        Uri uri = Uri.parse("");
+                        Intent gotoweb = new Intent();
+
+                        switch (menuItem.getItemId()) {
+                            case R.id.item_navigation_drawer_listado_noticias:
+                                menuItem.setChecked(true);
+                                //textView.setText(menuItem.getTitle());
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                return true;
+                            case R.id.item_navigation_drawer_facebook:
+                                menuItem.setChecked(true);
+                                Toast.makeText(NoticiasActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                uri = Uri.parse("https://www.facebook.com/PortalVallecas");
+                                gotoweb = new Intent(Intent.ACTION_VIEW, uri);
+                                startActivity(gotoweb);
+                                return true;
+                            case R.id.item_navigation_drawer_twitter:
+                                menuItem.setChecked(true);
+                                Toast.makeText(NoticiasActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                uri = Uri.parse("https://twitter.com/PortalVallecas");
+                                gotoweb = new Intent(Intent.ACTION_VIEW, uri);
+                                startActivity(gotoweb);
+                                return true;
+                            case R.id.item_navigation_drawer_googleplus:
+                                menuItem.setChecked(true);
+                                Toast.makeText(NoticiasActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                uri = Uri.parse("https://plus.google.com/+PortalvallecasEs");
+                                gotoweb = new Intent(Intent.ACTION_VIEW, uri);
+                                startActivity(gotoweb);
+                                return true;
+                            case R.id.item_navigation_drawer_ajustes:
+                                menuItem.setChecked(true);
+                                //textView.setText(menuItem.getTitle());
+                                Toast.makeText(NoticiasActivity.this, "Abriendo " + menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                //Comento esto pero deberÃ­a llevar a una nueva activity de las Settings
+                                //Intent intent = new Intent(NoticiasActivity.this, SettingsActivity.class);
+                                //startActivity(intent);
+                                return true;
+                            case R.id.item_navigation_drawer_correo:
+                                menuItem.setChecked(true);
+                                Toast.makeText(NoticiasActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                Intent intent = new Intent(NoticiasActivity.this, FormularioActivity.class);
+                                startActivity(intent);
+                                return true;
+                        }
+                        return true;
+                    }
+                });
+    }
 }
+
+

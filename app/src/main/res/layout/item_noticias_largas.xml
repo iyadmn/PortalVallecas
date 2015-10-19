@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/post_bg"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        android:layout_marginLeft="@dimen/post_item_margin"
+        android:layout_marginRight="@dimen/post_item_margin"
+        android:layout_marginTop="@dimen/post_item_margin"
+        android:background="@drawable/post_bg"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacing_xsmall">
+
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/imagen"
+            android:layout_width="307.50dp"
+            android:layout_height="170.00dp"
+            android:background="@color/md_white_1000"
+            android:scaleType="centerCrop"
+            android:visibility="visible"
+            android:contentDescription="" />
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/spacing"
+            android:paddingRight="@dimen/spacing"
+            android:paddingTop="@dimen/spacing">
+
+            <TextView
+                android:id="@+id/category"
+                android:text="Categoría"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/timestamp"
+                android:textSize="@dimen/post_item_timestamp" />
+
+            <TextView
+                android:id="@+id/timestamp"
+                android:text="Fecha"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/timestamp"
+                android:textSize="@dimen/post_item_timestamp" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/spacing"
+            android:paddingRight="@dimen/spacing"
+            android:paddingTop="@dimen/spacing_xsmall">
+
+            <TextView
+                android:id="@+id/titulo"
+                android:text="Título"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/post_item_profile_name"
+                android:textStyle="bold"
+                android:textColor="@color/md_grey_400" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/spacing"
+            android:paddingLeft="@dimen/spacing"
+            android:paddingRight="@dimen/spacing"
+            android:paddingTop="@dimen/spacing_xsmall">
+
+            <TextView
+                android:id="@+id/descripcion"
+                android:text="Título"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/spacing"
+                android:textColor="@color/md_grey_400" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
