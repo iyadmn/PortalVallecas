@@ -663,7 +663,7 @@
     <color name="md_divider">#1f000000</color>
 
     <!-- Color de la App de Codecanyon añadidos -->
-    <color name="post_bg">#d3d6db</color>
+    <color name="post_bg">#ffffff</color>
     <color name="timestamp">#a0a3a7</color>
     <color name="post_item_bg">#ffffff</color>
     <color name="post_item_border">#c2c3c8</color>

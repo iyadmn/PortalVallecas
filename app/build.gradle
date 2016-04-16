@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    buildToolsVersion '22.0.1'
     defaultConfig {
         applicationId 'com.portalvallecas.app'
         minSdkVersion 17
         targetSdkVersion 22
         versionCode 1
-        versionName '1.19.10.2015.03.51'
+        versionName '1.25.10.2015.03.09'
     }
     buildTypes {
         release {

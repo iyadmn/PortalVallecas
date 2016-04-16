@@ -22,12 +22,13 @@
         </activity>
 
         <!-- Declaramos la segunda actividad | Menú principal -->
-        <!-- Cambio esto: El menu principal deja de mostrarse tras el Splash, deja de ser el singleTop, la raiz de todas las activitys -->
+        <!-- Hago que la activity de MainMenu aparezca tras el Splash, es decir, pasa a ser el singleTop, la raiz de todas las activitys -->
+        <!-- Fuerzo a que la orientación sea vertical con android:screenOrientation="portrait" -->
         <activity
             android:name="com.tehagotuweb.portalvallecas.app.MainMenuActivity"
             android:label="@string/title_activity_segunda_actividad"
-            android:screenOrientation="portrait">
-            <!--android:launchMode="singleTop"-->
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -35,11 +36,20 @@
         </activity>
 
         <!-- Declaramos la tercera actividad | Últimas Noticias -->
-        <!-- Hago que la activity de noticias aparezca tras el Splash, es decir, pasa a ser el singleTop, la raiz de todas las activitys -->
+        <!-- Cambio esto: La activity de noticias de momento la salto para meter los fragments -->
+        <!-- Si al final se quita esta activity totalmente habría que quitar los siguientes archivos
+        java/
+            NoticiasActivity
+        res/layouts/
+            activity_noticias
+            activity_noticias_contabs
+        -->
+        <!-- Fuerzo a que la orientación sea vertical con android:screenOrientation="portrait" -->
         <activity
             android:name="com.tehagotuweb.portalvallecas.app.NoticiasActivity"
             android:label="@string/title_activity_tercera_actividad"
-            android:launchMode="singleTop">
+            android:screenOrientation="portrait">
+            <!--android:launchMode="singleTop">-->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

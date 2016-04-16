@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainMenuActivity"
+    android:background="@color/md_white_1000"
+    android:fitsSystemWindows="false">
+    <!-- Color del fondo blanco -->
+    <!-- fitsSystemWindows con valor false hace que la barra superior sea transparente, lo uso para SDK=19 -->
+
+    <!-- Corrección para las SDK superiores a 21, barra superior de alto 25dp como la barra de notificaciones-->
+    <FrameLayout
+        android:id="@+id/statusBar"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="?attr/colorPrimaryDark" />
+
+    <!-- Toolbar creada dado que hemos creado los style con el tema Theme.AppCompat.NoActionBar -->
+    <android.support.v7.widget.Toolbar
+        xmlns:tools="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        tools:layout_below="@+id/statusBar"
+        tools:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/boton_noticias"
+        android:id="@+id/BtnNoticias"
+        android:drawableStart="@drawable/noticias"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:padding="15dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/boton_facebook"
+        android:id="@+id/BtnFacebook"
+        android:drawableStart="@drawable/facebook"
+        android:layout_below="@+id/BtnNoticias"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:padding="15dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/boton_twitter"
+        android:id="@+id/BtnTwitter"
+        android:drawableStart="@drawable/twitter"
+        android:padding="15dp"
+        android:layout_below="@+id/BtnFacebook"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/boton_googleplus"
+        android:id="@+id/BtnGooglePlus"
+        android:drawableStart="@drawable/googleplus"
+        android:padding="15dp"
+        android:layout_below="@+id/BtnTwitter"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/boton_contactar"
+        android:id="@+id/BtnContactar"
+        android:drawableStart="@drawable/mail"
+        android:padding="15dp"
+        android:layout_below="@+id/BtnGooglePlus"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/boton_salir"
+        android:id="@+id/BtnSalir"
+        android:drawableStart="@drawable/exit"
+        android:width="150dp"
+        android:layout_below="@+id/BtnContactar"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

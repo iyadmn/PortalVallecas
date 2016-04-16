@@ -17,7 +17,7 @@
         <!-- Color del Accent -->
         <item name="colorAccent">@color/md_red_700</item>
         <!-- Color del Highlight de los botones -->
-        <item name="colorControlHighlight">@color/md_indigo_500_25</item>
+        <item name="colorControlHighlight">@color/md_grey_500_25</item>
 
         <!-- El windowTranslucentStatus le mete oscuridad a la StatusBar -->
         <item name="android:windowTranslucentStatus">true</item>

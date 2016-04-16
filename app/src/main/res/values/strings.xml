@@ -33,7 +33,7 @@
         <string name="about">Portal Vallecas App, aplicación diseñada por Iyad Megdadi Nuñez</string>
         <string name="github">GitHub: github.com/iyadmn</string>
         <string name="tituloversion">Versión:</string>
-        <string name="version">1.19.10.2015.03.51</string>
+        <string name="version">1.25.10.2015.03.09</string>
 
     <!--- String de la activity de al ver una noticia-->
     <string name="title_activity_quinta_actividad">Artículo</string>

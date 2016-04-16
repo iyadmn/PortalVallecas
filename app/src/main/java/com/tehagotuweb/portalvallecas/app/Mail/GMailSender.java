@@ -108,7 +108,7 @@ public class GMailSender extends javax.mail.Authenticator {
 
         public final int REPLY_TO_ADDRESSES_AMOUNT = 1;
 
-        // Variable creada para mostrar un di·logo
+        // Variable creada para mostrar un di√°logo
         private ProgressDialog progressDialog;
 
         private String subject;

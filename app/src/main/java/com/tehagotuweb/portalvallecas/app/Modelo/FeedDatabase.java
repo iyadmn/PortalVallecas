@@ -16,7 +16,7 @@ import java.util.List;
 
 public final class FeedDatabase extends SQLiteOpenHelper {
 
-    // Mapeado rápido de indices
+    // Mapeado rï¿½pido de indices
     private static final int COLUMN_ID = 0;
     private static final int COLUMN_TITULO = 1;
     private static final int COLUMN_DESC = 2;
@@ -29,10 +29,9 @@ public final class FeedDatabase extends SQLiteOpenHelper {
     private static FeedDatabase singleton;
 
     /*
-    Etiqueta de depuración
+    Etiqueta de depuraciï¿½n
      */
     private static final String TAG = FeedDatabase.class.getSimpleName();
-
 
     /*
     Nombre de la base de datos
@@ -40,7 +39,7 @@ public final class FeedDatabase extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Feed.db";
 
     /*
-    Versión actual de la base de datos
+    Versiï¿½n actual de la base de datos
      */
     public static final int DATABASE_VERSION = 1;
 
@@ -56,7 +55,7 @@ public final class FeedDatabase extends SQLiteOpenHelper {
     /**
      * Retorna la instancia unica del singleton
      *
-     * @param context contexto donde se ejecutarán las peticiones
+     * @param context contexto donde se ejecutarï¿½n las peticiones
      * @return Instancia
      */
     public static synchronized FeedDatabase getInstance(Context context) {
@@ -76,7 +75,7 @@ public final class FeedDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Añade los cambios que se realizarán en el esquema
+        // Aï¿½ade los cambios que se realizarï¿½n en el esquema
         db.execSQL("DROP TABLE IF EXISTS " + ScriptDatabase.ENTRADA_TABLE_NAME);
         onCreate(db);
     }
@@ -159,14 +158,14 @@ public final class FeedDatabase extends SQLiteOpenHelper {
 
     /**
      * Procesa una lista de items para su almacenamiento local
-     * y sincronización.
+     * y sincronizaciï¿½n.
      *
      * @param entries lista de items
      */
     public void sincronizarEntradas(List<Item> entries) {
         /*
         #1  Mapear temporalemente las entradas nuevas para realizar una
-            comparación con las locales
+            comparaciï¿½n con las locales
         */
         HashMap<String, Item> entryMap = new HashMap<String, Item>();
         for (Item e : entries) {
@@ -200,7 +199,7 @@ public final class FeedDatabase extends SQLiteOpenHelper {
 
             Item match = entryMap.get(titulo);
             if (match != null) {
-                // Filtrar entradas existentes. Remover para prevenir futura inserción
+                // Filtrar entradas existentes. Remover para prevenir futura inserciï¿½n
                 entryMap.remove(titulo);
 
                 /*
@@ -225,7 +224,7 @@ public final class FeedDatabase extends SQLiteOpenHelper {
         c.close();
 
         /*
-        #4 Añadir entradas nuevas
+        #4 Aï¿½adir entradas nuevas
         */
         for (Item e : entryMap.values()) {
             Log.i(TAG, "Insertado: titulo=" + e.getTitle());

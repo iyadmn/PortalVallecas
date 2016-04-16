@@ -95,7 +95,7 @@ public class SplashActivity extends Activity {
                 {
 
                     // Creamos un intent, un objeto de la clase Intent. El intent tiene una activity origen (this) y una activity destino (MainMenuActivity.class)
-                    Intent a = new Intent(SplashActivity.this, NoticiasActivity.class);
+                    Intent a = new Intent(SplashActivity.this, MainMenuActivity.class);
 
                     // Llamamos al m�todo startActivity pas�ndole como par�metro el intent
                     startActivity(a);
